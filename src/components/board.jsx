@@ -14,6 +14,12 @@ function renderSquare(i, knightPosition) {
   const isKnightHere = knightX === x && knightY === y
   const piece = isKnightHere ? <Knight /> : null
 
+  function handleSquareClick(toX, toY) {
+    console.log('trying to move the piece', { toX,  toY })
+    if (canMoveKnight(toX, toY)) {
+      moveKnight(toX, toY)
+    }
+  }
   return (
     <div
       key={i}
@@ -26,12 +32,6 @@ function renderSquare(i, knightPosition) {
   )
 }
 
-function handleSquareClick(toX, toY) {
-  console.log('trying to move the piece', { toX,  toY })
-  if (canMoveKnight(toX, toY)) {
-    moveKnight(toX, toY)
-  }
-}
 
 export function Board({ knightPosition = [0, 0] }) {
   const squares = []
