@@ -1,14 +1,7 @@
 let knightPosition = [1, 7]
 let observer = null
 
-function emitChange() {
-  observer(knightPosition)
-}
-
 export function observe(o) {
-  // const randPos = () => Math.floor(Math.random() * 8)
-  // setInterval(() => receive([randPos(), randPos()]), 500)
-
   if (observer) {
     throw new Error('Multiple observers not implemented.')
   }
@@ -17,6 +10,9 @@ export function observe(o) {
   emitChange()
 }
 
+function emitChange() {
+  observer(knightPosition)
+}
 
 export function moveKnight(toX, toY) {
   knightPosition = [toX, toY]

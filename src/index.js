@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { observe } from './observers/observe'
+import { GameObserver } from './observers'
 import { Board } from './components'
 
 const root = document.getElementById('root')
 
-observe((knightPosition) => {
+GameObserver.observe((knightPosition) => {
     ReactDOM.render(<Board knightPosition={knightPosition} />, root)
   }
 )

@@ -2,7 +2,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Knight } from './knight'
 import { BoardSquare } from './board-square'
-import { canMoveKnight, moveKnight } from '../observers/observe'
+import { GameObserver } from '../observers'
 
 function renderPiece(x, y, [knightX, knightY]) {
   const isKnightHere = knightX === x && knightY === y
@@ -15,8 +15,8 @@ function renderSquare(i, knightPosition) {
   const y = Math.floor(i / 8)
 
   function handleSquareClick(toX, toY) {
-    if (canMoveKnight(toX, toY)) {
-      moveKnight(toX, toY)
+    if (GameObserver.canMoveKnight(toX, toY)) {
+      GameObserver.moveKnight(toX, toY)
     }
   }
 
