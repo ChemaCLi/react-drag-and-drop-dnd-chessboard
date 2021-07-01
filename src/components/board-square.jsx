@@ -27,19 +27,25 @@ export function BoardSquare({ x, y, children }) {
       <Square black={black}>
         {children}
       </Square>
-      {isOver && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-            zIndex: 1,
-            opacity: 0.5,
-            backgroundColor: 'yellow',
-          }} />
-      )}
+      {!isOver && canDrop && <Overlay color='yellow' />}
+      {isOver && !canDrop && <Overlay color='red' />}
+      {isOver && canDrop && <Overlay color='green' />}
     </div>
+  )
+}
+
+function Overlay({ color }) {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: color,
+      }} />
   )
 }
