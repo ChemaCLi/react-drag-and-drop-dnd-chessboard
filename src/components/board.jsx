@@ -14,6 +14,8 @@ function renderSquare(i, knightPosition) {
   const x = i % 8
   const y = Math.floor(i / 8)
 
+  // this can be removed but I want to allow to move the piece by clicking
+  // the target square
   function handleSquareClick(toX, toY) {
     if (GameObserver.canMoveKnight(toX, toY)) {
       GameObserver.moveKnight(toX, toY)
