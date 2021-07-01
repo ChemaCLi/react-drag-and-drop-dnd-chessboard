@@ -1,14 +1,16 @@
 import { Square } from './square'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../constants'
-import { moveKnight } from '../observers/observe'
+import { canMoveKnight, moveKnight } from '../observers/observe'
 
 export function BoardSquare({ x, y, children }) {
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemTypes.KNIGHT,
     drop: () => moveKnight(x, y),
+    canDrop: () => canMoveKnight(x, y),
     collect: monitor => ({
-      isOver: !!monitor.isOver()
+      isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop()
     })
   }), [x, y])
 
