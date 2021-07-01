@@ -1,33 +1,33 @@
-import { Square } from './square'
-import { Knight } from './knight'
-import { canMoveKnight, moveKnight } from '../observers/observe'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { Knight } from './knight'
+import { BoardSquare } from './board-square'
+import { canMoveKnight, moveKnight } from '../observers/observe'
+
+function renderPiece(x, y, [knightX, knightY]) {
+  const isKnightHere = knightX === x && knightY === y
+
+  return isKnightHere ? <Knight /> : null
+}
 
 function renderSquare(i, knightPosition) {
   const x = i % 8
   const y = Math.floor(i / 8)
 
-  const [knightX, knightY] = knightPosition
-
-  const black = (x + y) % 2 === 1
-  const isKnightHere = knightX === x && knightY === y
-  const piece = isKnightHere ? <Knight /> : null
-
   function handleSquareClick(toX, toY) {
-    console.log('trying to move the piece', { toX,  toY })
     if (canMoveKnight(toX, toY)) {
       moveKnight(toX, toY)
     }
   }
+
   return (
     <div
       key={i}
       onClick={() => handleSquareClick(x, y)}
       style={{ width: '50px', height: '50px' }}>
-      <Square black={black}>
-        {piece}
-      </Square>
+      <BoardSquare x={x} y={y}>
+        {renderPiece(x, y, knightPosition)}
+      </BoardSquare>
     </div>
   )
 }
